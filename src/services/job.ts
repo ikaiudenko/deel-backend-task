@@ -93,7 +93,7 @@ export class JobService extends BaseService {
             )
             await this.profileService.updateBalance(
                 contract.ContractorId,
-                contractorBalance + priceToPay,
+                contractorBalance + job.price,
                 payTransaction
             )
             await payTransaction.commit()
