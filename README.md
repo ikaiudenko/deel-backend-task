@@ -13,6 +13,8 @@ use http://localhost:3001 for api requests described below
 
 ## Swagger Documentation http://localhost:3001/api-docs/
 
+Apply profile ID using Authorization popup to access restricted endpoints.
+
 ## Testing
 
 run `npm run seed`
