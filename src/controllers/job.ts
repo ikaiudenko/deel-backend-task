@@ -27,7 +27,7 @@ export class JobController {
             await this.jobService.pay(Number(id), profileId)
             return res.status(201).json()
         } catch (err) {
-            return res.status(500).json({ error: (err as Error)?.message })
+            return res.status(500).json({ message: (err as Error)?.message })
         }
     }
 }

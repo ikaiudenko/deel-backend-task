@@ -32,17 +32,19 @@ export class JobService extends BaseService {
         const limit = Number(query?.limit) || 10
         const res = await Job.findAll({
             where: {
-                paid: null,
+                paid: 0,
             },
             include: [
                 {
                     model: Contract,
+                    as: 'Contract',
                     where: {
                         ...this.profileQuery(profileId),
                         status: {
                             [Op.ne]: ContractStatus.Terminated,
                         },
                     },
+                    required: true,
                 },
             ],
             offset,

@@ -14,7 +14,7 @@ export class BalanceController {
         const { error, value } = depositReq.validate(req.body)
 
         if (error) {
-            return res.status(400).json({ error: error.details[0].message })
+            return res.status(400).json({ message: error.details[0].message })
         }
 
         try {

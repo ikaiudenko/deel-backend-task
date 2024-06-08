@@ -7,7 +7,6 @@ import swaggerUi from 'swagger-ui-express'
 import swaggerOutput from '../swagger_output.json'
 import mainRouter from './routes'
 import Database from './config/db'
-import { ProfileMiddleware } from './middleware/profile'
 
 export default class Server {
     readonly expressInstance: express.Express
@@ -51,6 +50,6 @@ export default class Server {
         // Instantiate mainRouter object
         const router = new mainRouter().router
         // Add to server routes
-        this.expressInstance.use('/', ProfileMiddleware.getProfile, router)
+        this.expressInstance.use('/', router)
     }
 }

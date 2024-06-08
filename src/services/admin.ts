@@ -10,14 +10,11 @@ import { ProfileType } from '../types/profile'
 
 export class AdminService extends BaseService {
     static readonly LIMIT = 2
+    static readonly MAX_LIMIT = 10
 
     async getBestProfession(queryParams?: AdminQueryParams) {
-        const {
-            end = new Date(),
-            start = new Date(),
-            limit = AdminService.LIMIT,
-            offset = 0,
-        } = queryParams || {}
+        const { end, start, limit, offset } = this.validateQuery(queryParams)
+
         const profiles = await this.db.query<IBestProfessionEntity>(
             `
               SELECT Profiles.id, Profiles.profession, SUM(Jobs.price) as price
@@ -51,12 +48,7 @@ export class AdminService extends BaseService {
     }
 
     async getBestClients(queryParams?: AdminQueryParams) {
-        const {
-            end = new Date(),
-            start = new Date(),
-            limit = AdminService.LIMIT,
-            offset = 0,
-        } = queryParams || {}
+        const { end, start, limit, offset } = this.validateQuery(queryParams)
         // const profiles = await Profile.findAll({
         //     attributes: [
         //         'id',
@@ -125,5 +117,31 @@ export class AdminService extends BaseService {
         return Array.isArray(profiles)
             ? profiles.map((i) => ProfileDto.createBestClient(i))
             : []
+    }
+
+    private validateQuery(queryParams?: AdminQueryParams) {
+        const {
+            end = new Date(),
+            start = new Date(),
+            limit = AdminService.LIMIT,
+            offset = 0,
+        } = queryParams || {}
+
+        if (!Number(limit)) {
+            throw new Error(`Limit should be number`)
+        }
+
+        if (Number(limit) > AdminService.MAX_LIMIT) {
+            throw new Error(
+                `Limit can not be greater than ${AdminService.MAX_LIMIT}`
+            )
+        }
+
+        return {
+            end,
+            start,
+            limit,
+            offset,
+        }
     }
 }

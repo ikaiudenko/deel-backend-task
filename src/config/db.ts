@@ -10,7 +10,6 @@ export default class Database {
         if (this.database) {
             return this.database
         }
-        console.error(process.env.DB_DIALECT)
         this.database = new Sequelize({
             dialect: process.env.DB_DIALECT as Dialect,
             storage: process.env.DB_STORAGE as string,

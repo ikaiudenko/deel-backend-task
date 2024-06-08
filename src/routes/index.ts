@@ -3,6 +3,7 @@ import { ContractController } from '../controllers/contract'
 import { JobController } from '../controllers/job'
 import { BalanceController } from '../controllers/balance'
 import { AdminController } from '../controllers/admin'
+import { ProfileMiddleware as profile } from '../middleware/profile'
 
 export default class MainRouter {
     readonly router: Router
@@ -26,19 +27,29 @@ export default class MainRouter {
     private initRoutes() {
         this.router
             .route('/contracts/:id')
-            .get((req, res) => this.contractController.getById(req, res))
+            .get(profile.getProfile, (req, res) =>
+                this.contractController.getById(req, res)
+            )
         this.router
             .route('/contracts')
-            .get((req, res) => this.contractController.getActiveList(req, res))
+            .get(profile.getProfile, (req, res) =>
+                this.contractController.getActiveList(req, res)
+            )
         this.router
             .route('/jobs/unpaid')
-            .get((req, res) => this.jobController.getUnpaidList(req, res))
+            .get(profile.getProfile, (req, res) =>
+                this.jobController.getUnpaidList(req, res)
+            )
         this.router
             .route('/jobs/:id/pay')
-            .post((req, res) => this.jobController.pay(req, res))
+            .post(profile.getProfile, (req, res) =>
+                this.jobController.pay(req, res)
+            )
         this.router
             .route('/balances/deposit/:userId')
-            .post((req, res) => this.balanceController.deposit(req, res))
+            .post(profile.getProfile, (req, res) =>
+                this.balanceController.deposit(req, res)
+            )
         this.router
             .route('/admin/best-profession')
             .get((req, res) => this.adminController.getBestProfession(req, res))

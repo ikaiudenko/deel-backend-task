@@ -15,10 +15,10 @@ declare global {
 const port = Number(process.env.PORT)
 
 // Instantiate the expressServer class
-const expressInstance = new expressServer().expressInstance
+export const expressInstance = new expressServer().expressInstance
 
 // Create the HTTP Express Server
-const server = http.createServer(expressInstance)
+export const server = http.createServer(expressInstance)
 
 server.listen(port)
 server.on('error', onError)

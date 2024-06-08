@@ -1,4 +1,3 @@
-import { QueryTypes } from 'sequelize'
 import { ContractStatus } from '../types/contract'
 import { ProfileService } from './profile'
 import { BaseService } from './basic'
