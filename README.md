@@ -4,6 +4,22 @@
 
 This backend exercise involves building a Node.js/Express.js app that will serve a REST API. We imagine you should spend around 3 hours at implement this feature.
 
+## Start Project
+
+run `npm install`
+run `npm run seed`
+run `npm start`
+use http://localhost:3001 for api requests described below
+
+## Swagger Documentation http://localhost:3001/api-docs/
+
+## Testing
+
+run `npm run seed`
+run `npm run test`
+Tests will be run before committing changes together with formatter and linter.
+E2E tests required database connection. Please make sure you applied seeds.
+
 ## Data Models
 
 > **All models are defined in src/model.js**
@@ -40,12 +56,12 @@ The exercise requires [Node.js](https://nodejs.org/en/) to be installed. We reco
 
 ## Technical Notes
 
-- The server is running with [nodemon](https://nodemon.io/) which will automatically restart for you when you modify and save a file.
+-   The server is running with [nodemon](https://nodemon.io/) which will automatically restart for you when you modify and save a file.
 
-- The database provider is SQLite, which will store data in a file local to your repository called `database.sqlite3`. The ORM [Sequelize](http://docs.sequelizejs.com/) is on top of it. You should only have to interact with Sequelize - **please spend some time reading sequelize documentation before starting the exercise.**
+-   The database provider is SQLite, which will store data in a file local to your repository called `database.sqlite3`. The ORM [Sequelize](http://docs.sequelizejs.com/) is on top of it. You should only have to interact with Sequelize - **please spend some time reading sequelize documentation before starting the exercise.**
 
-- To authenticate users use the `getProfile` middleware that is located under src/middleware/getProfile.js. users are authenticated by passing `profile_id` in the request header. after a user is authenticated his profile will be available under `req.profile`. make sure only users that are on the contract can access their contracts.
-- The server is running on port 3001.
+-   To authenticate users use the `getProfile` middleware that is located under src/middleware/getProfile.js. users are authenticated by passing `profile_id` in the request header. after a user is authenticated his profile will be available under `req.profile`. make sure only users that are on the contract can access their contracts.
+-   The server is running on port 3001.
 
 ## APIs To Implement
 
